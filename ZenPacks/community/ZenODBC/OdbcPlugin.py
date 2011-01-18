@@ -1,7 +1,7 @@
 ################################################################################
 #
 # This program is part of the ZenODBC Zenpack for Zenoss.
-# Copyright (C) 2009, 2010 Egor Puzanov.
+# Copyright (C) 2009, 2010, 2011 Egor Puzanov.
 #
 # This program can be used under the GNU General Public License version 2
 # You can find full information here: http://www.zenoss.com/oss
@@ -12,7 +12,7 @@ __doc__="""OdbcPlugin
 
 wrapper for PythonPlugin
 
-$Id: OdbcPlugin.py,v 1.5 2010/08/18 19:16:55 egor Exp $"""
+$Id: OdbcPlugin.py,v 1.6 2011/01/18 23:59:45 egor Exp $"""
 
 __version__ = "$Revision: 1.5 $"[11:-2]
 
@@ -43,7 +43,7 @@ class OdbcPlugin(CollectorPlugin):
                     columns = dict(zip(columns, columns))
             else:
                 sql, kb, cs, columns = query 
-            queries[tname] = (sql, {}, "findodbc, '" + cs + "'", columns)
+            queries[tname] = (sql, {}, "'findodbc','" + cs + "'", columns)
         return SQLClient(device).query(queries)
 
 
