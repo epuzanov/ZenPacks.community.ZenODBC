@@ -12,27 +12,15 @@ __doc__="""OdbcPlugin
 
 wrapper for PythonPlugin
 
-$Id: OdbcPlugin.py,v 1.6 2011/01/18 23:59:45 egor Exp $"""
+$Id: OdbcPlugin.py,v 1.7 2011/02/27 21:07:21 egor Exp $"""
 
-__version__ = "$Revision: 1.5 $"[11:-2]
+__version__ = "$Revision: 1.7 $"[11:-2]
 
 from Products.DataCollector.plugins.CollectorPlugin import CollectorPlugin
 from twisted.python.failure import Failure
 from ZenPacks.community.SQLDataSource.SQLClient import SQLClient
 
-class OdbcPlugin(CollectorPlugin):
-    """
-    A OdbcPlugin defines a native Python collection routine and a parsing
-    method to turn the returned data structure into a datamap. A valid
-    OdbcPlugin must implement the process method.
-    """
-    transport = "python"
-
-    tables = {}
-
-    def queries(self, device = None):
-        return self.tables
-
+class OdbcPlugin(SQLClient):
 
     def collect(self, device, log):
         queries = self.queries(device)
@@ -44,15 +32,4 @@ class OdbcPlugin(CollectorPlugin):
             else:
                 sql, kb, cs, columns = query 
             queries[tname] = (sql, {}, "'findodbc','" + cs + "'", columns)
-        return SQLClient(device).query(queries)
-
-
-    def preprocess(self, results, log):
-        newres = {}
-        for table, value in results.iteritems():
-            if value != []:
-                if isinstance(value[0], Failure):
-                    log.error(value[0].getErrorMessage())
-                    continue
-            newres[table] = value
-        return newres
+        return SQLClient.collect(device, log, queries)
