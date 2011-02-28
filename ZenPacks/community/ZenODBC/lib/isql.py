@@ -23,7 +23,7 @@
 #***************************************************************************
 
 __author__ = "Egor Puzanov"
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 import types, string, time, datetime, warnings, subprocess, os
 
 ### module constants
@@ -405,7 +405,7 @@ class isqlCnx:
 		if self._queue == []: return
 		if self._cnx:
 			for query in self._queue:
-				self._cnx.stdin.write('%s\n'%query.strip())
+				self._cnx.stdin.write('%s\n'%query.strip().replace('\n', ' '))
 			self._cnx.stdin.write('\n')
 			self._queue = []
 			try:
