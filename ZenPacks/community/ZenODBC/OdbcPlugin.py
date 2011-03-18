@@ -20,7 +20,7 @@ from ZenPacks.community.SQLDataSource.SQLPlugin import SQLPlugin
 
 class OdbcPlugin(SQLPlugin):
 
-    def collect(self, device, log):
+    def prepareQueries(self, device):
         queries = self.queries(device)
         for tname, query in queries.iteritems():
             if len(query) == 3:
@@ -31,4 +31,4 @@ class OdbcPlugin(SQLPlugin):
             else:
                 sql, kbs, cs, columns = query 
             queries[tname] = (sql, kbs, "'findodbc','" + cs + "'", columns)
-        return SQLPlugin.collect(self, device, log, queries)
+        return queries
