@@ -12,9 +12,9 @@ __doc__="""OdbcPlugin
 
 wrapper for PythonPlugin
 
-$Id: OdbcPlugin.py,v 1.8 2011/02/28 16:34:17 egor Exp $"""
+$Id: OdbcPlugin.py,v 2.0 2011/05/03 22:20:29 egor Exp $"""
 
-__version__ = "$Revision: 1.8 $"[11:-2]
+__version__ = "$Revision: 2.0 $"[11:-2]
 
 from ZenPacks.community.SQLDataSource.SQLPlugin import SQLPlugin
 
@@ -30,5 +30,5 @@ class OdbcPlugin(SQLPlugin):
                     columns = dict(zip(columns, columns))
             else:
                 sql, kbs, cs, columns = query 
-            queries[tname] = (sql, kbs, "'findodbc','" + cs + "'", columns)
+            queries[tname] = (sql, kbs, "'pyisqldb','" + cs + "'", columns)
         return queries
