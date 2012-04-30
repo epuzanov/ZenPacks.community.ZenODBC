@@ -3,6 +3,13 @@
 ZenPacks.community.ZenODBC
 ================================
 
+DEPRECATION WARNING
+===================
+
+Use of ODBC data source is deprecated. Please use
+`SQL <http://community.zenoss.org/docs/DOC-5913>`_ data source with **pyodbc**
+or **pyisqldb** DB-API 2.0 interface instead.
+
 About
 =====
 
